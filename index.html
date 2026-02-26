@@ -126,6 +126,24 @@
             box-shadow: 0 0 0 3px rgba(255,255,255,0.3);
         }
 
+        .btn-success {
+            background: linear-gradient(135deg, #27ae60 0%, #229954 100%);
+            color: white;
+            padding: 12px 30px;
+            font-size: 16px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-weight: bold;
+            width: 100%;
+        }
+
+        .btn-success:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(39, 174, 96, 0.4);
+        }
+
         .timer {
             text-align: center;
             font-size: 32px;
@@ -304,11 +322,6 @@
             background-color: #7f8c8d;
         }
 
-        .btn-success {
-            background: linear-gradient(135deg, #27ae60 0%, #229954 100%);
-            color: white;
-        }
-
         .btn-info {
             background: linear-gradient(135deg, #f39c12 0%, #e67e22 100%);
             color: white;
@@ -424,7 +437,7 @@
             <h3>📋 Registro del Estudiante</h3>
             <input type="text" id="studentName" placeholder="Nombre completo" required>
             <input type="text" id="studentId" placeholder="Matrícula o ID" required>
-            <button class="btn-success" onclick="registerStudent()" style="width: 100%;">Comenzar Examen</button>
+            <button class="btn-success" onclick="registerStudent()">Comenzar Examen</button>
         </div>
 
         <div id="examContent" style="display: none;">
@@ -468,16 +481,14 @@
 
     <script>
         // =============================================
-        // EXÁMENES DE PENSAMIENTO MATEMÁTICO
-        // 3 NIVELES · 30 PREGUNTAS CADA UNO
+        // EXÁMENES DE PENSAMIENTO MATEMÁTICO (versión reducida para prueba)
         // =============================================
         const exams = [
-            // ========== NIVEL MEDIO ==========
+            // NIVEL MEDIO (10 preguntas para prueba)
             {
                 name: "Nivel Medio - Pensamiento Matemático",
                 level: "Medio",
                 questions: [
-                    // Aritmética (8 preguntas)
                     {
                         text: "¿Cuál es el resultado de 3/4 + 2/5?",
                         options: ["23/20", "5/9", "15/20"],
@@ -493,50 +504,6 @@
                         explanation: "El mínimo común múltiplo de 3 y 4 es 12"
                     },
                     {
-                        text: "¿Cuál es  el 20% de 450?",
-                        options: ["90", "45", "100"],
-                        correct: 0,
-                        topic: "Aritmética",
-                        explanation: "20% = 0.2, 0.2 × 450 = 90"
-                    },
-                    {
-                        text: "¿Cuál es la raíz cuadrada de 144?",
-                        options: ["12", "14", "16"],
-                        correct: 0,
-                        topic: "Aritmética",
-                        explanation: "12 × 12 = 144"
-                    },
-                    {
-                        text: "Si a = 3 y b = 4, ¿cuánto es a² + b²?",
-                        options: ["25", "7", "12"],
-                        correct: 0,
-                        topic: "Aritmética",
-                        explanation: "3² + 4² = 9 + 16 = 25"
-                    },
-                    {
-                        text: "¿Cuál es el resultado de 2³ × 2²?",
-                        options: ["2⁵", "2⁶", "4⁵"],
-                        correct: 0,
-                        topic: "Aritmética",
-                        explanation: "Se suman exponentes: 2³⁺² = 2⁵"
-                    },
-                    {
-                        text: "¿Cuál es el mínimo común múltiplo de 6 y 8?",
-                        options: ["24", "48", "16"],
-                        correct: 0,
-                        topic: "Aritmética",
-                        explanation: "MCM(6,8) = 24"
-                    },
-                    {
-                        text: "¿Cuál es el máximo común divisor de 18 y 24?",
-                        options: ["6", "8", "12"],
-                        correct: 0,
-                        topic: "Aritmética",
-                        explanation: "MCD(18,24) = 6"
-                    },
-                    
-                    // Álgebra (8 preguntas)
-                    {
                         text: "Resuelve: 2x + 5 = 15",
                         options: ["x=5", "x=10", "x=7.5"],
                         correct: 0,
@@ -551,62 +518,11 @@
                         explanation: "3x + 6 - 2x = x + 6"
                     },
                     {
-                        text: "Si x + y = 7 y x - y = 3, ¿cuánto vale x?",
-                        options: ["5", "4", "6"],
-                        correct: 0,
-                        topic: "Álgebra",
-                        explanation: "Sumando: 2x = 10, x = 5"
-                    },
-                    {
-                        text: "¿Cuál es el valor de x en x² = 49?",
-                        options: ["±7", "7", "-7"],
-                        correct: 0,
-                        topic: "Álgebra",
-                        explanation: "x = ±7"
-                    },
-                    {
-                        text: "Factoriza: x² - 16",
-                        options: ["(x-4)(x+4)", "(x-4)²", "(x+4)²"],
-                        correct: 0,
-                        topic: "Álgebra",
-                        explanation: "Diferencia de cuadrados"
-                    },
-                    {
-                        text: "Resuelve: 3x - 7 = 2x + 5",
-                        options: ["x=12", "x=2", "x=6"],
-                        correct: 0,
-                        topic: "Álgebra",
-                        explanation: "3x - 2x = 5 + 7, x = 12"
-                    },
-                    {
-                        text: "¿Cuál es la pendiente de y = 2x + 3?",
-                        options: ["2", "3", "1/2"],
-                        correct: 0,
-                        topic: "Álgebra",
-                        explanation: "En y = mx + b, la pendiente es m = 2"
-                    },
-                    {
-                        text: "Si f(x) = 2x - 1, ¿cuánto es f(3)?",
-                        options: ["5", "4", "6"],
-                        correct: 0,
-                        topic: "Álgebra",
-                        explanation: "2(3) - 1 = 6 - 1 = 5"
-                    },
-                    
-                    // Geometría (7 preguntas)
-                    {
                         text: "¿Cuál es el área de un cuadrado de lado 5 cm?",
                         options: ["25 cm²", "20 cm²", "10 cm²"],
                         correct: 0,
                         topic: "Geometría",
                         explanation: "Área = lado² = 5² = 25"
-                    },
-                    {
-                        text: "¿Cuál es el perímetro de un rectángulo de base 6 y altura 4?",
-                        options: ["20", "24", "10"],
-                        correct: 0,
-                        topic: "Geometría",
-                        explanation: "Perímetro = 2(6+4) = 20"
                     },
                     {
                         text: "¿Cuánto mide la hipotenusa de un triángulo con catetos 3 y 4?",
@@ -615,36 +531,6 @@
                         topic: "Geometría",
                         explanation: "Por Pitágoras: √(3²+4²) = √25 = 5"
                     },
-                    {
-                        text: "¿Cuál es el área de un círculo de radio 3?",
-                        options: ["9π", "6π", "3π"],
-                        correct: 0,
-                        topic: "Geometría",
-                        explanation: "Área = πr² = 9π"
-                    },
-                    {
-                        text: "¿Cuántos grados suman los ángulos internos de un triángulo?",
-                        options: ["180°", "360°", "90°"],
-                        correct: 0,
-                        topic: "Geometría",
-                        explanation: "Siempre suman 180°"
-                    },
-                    {
-                        text: "¿Cuál es el volumen de un cubo de arista 2?",
-                        options: ["8", "4", "6"],
-                        correct: 0,
-                        topic: "Geometría",
-                        explanation: "Volumen = arista³ = 8"
-                    },
-                    {
-                        text: "¿Cuál es el área de un triángulo de base 6 y altura 4?",
-                        options: ["12", "24", "10"],
-                        correct: 0,
-                        topic: "Geometría",
-                        explanation: "Área = (base×altura)/2 = 12"
-                    },
-                    
-                    // Probabilidad y Estadística (7 preguntas)
                     {
                         text: "¿Cuál es la probabilidad de obtener un 5 al lanzar un dado?",
                         options: ["1/6", "1/5", "1/3"],
@@ -672,37 +558,15 @@
                         correct: 0,
                         topic: "Estadística",
                         explanation: "El 4 aparece 3 veces"
-                    },
-                    {
-                        text: "En una urna con 3 bolas rojas y 2 azules, ¿probabilidad de roja?",
-                        options: ["3/5", "2/5", "1/5"],
-                        correct: 0,
-                        topic: "Probabilidad",
-                        explanation: "3 favorables de 5 totales"
-                    },
-                    {
-                        text: "¿Cuántas permutaciones de 3 elementos hay en 5 elementos?",
-                        options: ["60", "20", "10"],
-                        correct: 0,
-                        topic: "Combinatoria",
-                        explanation: "P(5,3) = 5×4×3 = 60"
-                    },
-                    {
-                        text: "¿Cuántas combinaciones de 2 elementos hay en 4 elementos?",
-                        options: ["6", "12", "4"],
-                        correct: 0,
-                        topic: "Combinatoria",
-                        explanation: "C(4,2) = 6"
                     }
                 ]
             },
             
-            // ========== NIVEL MEDIO-ALTO ==========
+            // NIVEL MEDIO-ALTO (5 preguntas para prueba)
             {
                 name: "Nivel Medio-Alto - Pensamiento Matemático",
                 level: "Medio-Alto",
                 questions: [
-                    // Aritmética avanzada (7 preguntas)
                     {
                         text: "¿Cuál es el resultado de (2/3) ÷ (4/5)?",
                         options: ["5/6", "8/15", "3/2"],
@@ -710,50 +574,6 @@
                         topic: "Aritmética",
                         explanation: "(2/3) × (5/4) = 10/12 = 5/6"
                     },
-                    {
-                        text: "Si 3x + 2 = 14, ¿cuánto vale 2x - 1?",
-                        options: ["7", "5", "9"],
-                        correct: 0,
-                        topic: "Aritmética",
-                        explanation: "3x = 12, x = 4, entonces 2(4)-1 = 7"
-                    },
-                    {
-                        text: "¿Cuál es 15% de 240?",
-                        options: ["36", "24", "30"],
-                        correct: 0,
-                        topic: "Aritmética",
-                        explanation: "0.15 × 240 = 36"
-                    },
-                    {
-                        text: "¿Cuál es la raíz cúbica de 27?",
-                        options: ["3", "9", "6"],
-                        correct: 0,
-                        topic: "Aritmética",
-                        explanation: "3 × 3 × 3 = 27"
-                    },
-                    {
-                        text: "Simplifica: 2³ × 2⁴ ÷ 2²",
-                        options: ["2⁵", "2⁹", "2⁷"],
-                        correct: 0,
-                        topic: "Aritmética",
-                        explanation: "2³⁺⁴⁻² = 2⁵"
-                    },
-                    {
-                        text: "MCM de 12, 18 y 24",
-                        options: ["72", "36", "48"],
-                        correct: 0,
-                        topic: "Aritmética",
-                        explanation: "El MCM es 72"
-                    },
-                    {
-                        text: "MCD de 36, 48 y 60",
-                        options: ["12", "6", "24"],
-                        correct: 0,
-                        topic: "Aritmética",
-                        explanation: "El MCD es 12"
-                    },
-                    
-                    // Álgebra intermedia (8 preguntas)
                     {
                         text: "Resuelve: 2(x - 3) = 3(x + 1)",
                         options: ["x = -9", "x = 9", "x = -3"],
@@ -769,50 +589,6 @@
                         explanation: "3×4=12, 3+4=7"
                     },
                     {
-                        text: "Resuelve: 2x + 3y = 13, x - y = 4",
-                        options: ["x=5, y=1", "x=4, y=0", "x=6, y=2"],
-                        correct: 0,
-                        topic: "Álgebra",
-                        explanation: "De la segunda: x = y+4. Sustituyendo: 2(y+4)+3y=13 → 5y+8=13 → y=1, x=5"
-                    },
-                    {
-                        text: "¿Cuál es la ecuación de la recta con pendiente 2 que pasa por (1,3)?",
-                        options: ["y=2x+1", "y=2x+3", "y=2x-1"],
-                        correct: 0,
-                        topic: "Álgebra",
-                        explanation: "y - 3 = 2(x - 1) → y = 2x + 1"
-                    },
-                    {
-                        text: "Resuelve: x² - 5x + 6 = 0",
-                        options: ["x=2,3", "x=1,6", "x=3,4"],
-                        correct: 0,
-                        topic: "Álgebra",
-                        explanation: "(x-2)(x-3)=0 → x=2,3"
-                    },
-                    {
-                        text: "Si f(x) = x² - 4x, ¿cuánto es f(3)?",
-                        options: ["-3", "3", "0"],
-                        correct: 0,
-                        topic: "Álgebra",
-                        explanation: "9 - 12 = -3"
-                    },
-                    {
-                        text: "Simplifica: (x² - 9)/(x - 3)",
-                        options: ["x+3", "x-3", "x²+3x+9"],
-                        correct: 0,
-                        topic: "Álgebra",
-                        explanation: "(x-3)(x+3)/(x-3) = x+3"
-                    },
-                    {
-                        text: "Resuelve: 3x - 5 < 7",
-                        options: ["x<4", "x>4", "x<12"],
-                        correct: 0,
-                        topic: "Álgebra",
-                        explanation: "3x < 12 → x < 4"
-                    },
-                    
-                    // Geometría analítica (8 preguntas)
-                    {
                         text: "¿Cuál es la distancia entre los puntos (1,2) y (4,6)?",
                         options: ["5", "4", "6"],
                         correct: 0,
@@ -820,114 +596,20 @@
                         explanation: "√[(4-1)² + (6-2)²] = √(9+16) = √25 = 5"
                     },
                     {
-                        text: "¿Cuál es el punto medio entre (2,4) y (6,8)?",
-                        options: ["(4,6)", "(3,5)", "(5,7)"],
-                        correct: 0,
-                        topic: "Geometría",
-                        explanation: "((2+6)/2, (4+8)/2) = (4,6)"
-                    },
-                    {
-                        text: "¿Cuál es la ecuación de la circunferencia con centro (0,0) y radio 3?",
-                        options: ["x²+y²=9", "x²+y²=3", "(x-3)²+y²=9"],
-                        correct: 0,
-                        topic: "Geometría",
-                        explanation: "x² + y² = r² = 9"
-                    },
-                    {
-                        text: "¿Cuál es el vértice de la parábola y = x² - 4x + 3?",
-                        options: ["(2,-1)", "(-2,15)", "(0,3)"],
-                        correct: 0,
-                        topic: "Geometría",
-                        explanation: "Vértice x = -b/2a = 4/2 = 2, y = 4-8+3 = -1"
-                    },
-                    {
-                        text: "¿Cuál es la pendiente de la recta 3x + 2y = 6?",
-                        options: ["-3/2", "3/2", "-2/3"],
-                        correct: 0,
-                        topic: "Geometría",
-                        explanation: "2y = -3x + 6 → y = -3x/2 + 3, pendiente -3/2"
-                    },
-                    {
-                        text: "¿Cuál es el área del triángulo con vértices (0,0), (4,0), (0,3)?",
-                        options: ["6", "12", "7"],
-                        correct: 0,
-                        topic: "Geometría",
-                        explanation: "base×altura/2 = 4×3/2 = 6"
-                    },
-                    {
-                        text: "¿Cuál es la ecuación de la recta perpendicular a y=2x+1 que pasa por (0,0)?",
-                        options: ["y = -x/2", "y = -2x", "y = x/2"],
-                        correct: 0,
-                        topic: "Geometría",
-                        explanation: "Pendiente perpendicular = -1/2, ecuación y = -x/2"
-                    },
-                    {
-                        text: "¿Cuál es el centro de la elipse (x-2)²/9 + (y+1)²/4 = 1?",
-                        options: ["(2,-1)", "(-2,1)", "(3,2)"],
-                        correct: 0,
-                        topic: "Geometría",
-                        explanation: "Centro en (h,k) = (2,-1)"
-                    },
-                    
-                    // Probabilidad condicional (7 preguntas)
-                    {
                         text: "Si P(A)=0.6, P(B)=0.5, P(A∩B)=0.3, ¿P(A|B)?",
                         options: ["0.6", "0.5", "0.3"],
                         correct: 0,
                         topic: "Probabilidad",
                         explanation: "P(A|B) = 0.3/0.5 = 0.6"
-                    },
-                    {
-                        text: "¿De cuántas formas se pueden ordenar 5 libros en un estante?",
-                        options: ["120", "60", "24"],
-                        correct: 0,
-                        topic: "Combinatoria",
-                        explanation: "5! = 120"
-                    },
-                    {
-                        text: "¿Probabilidad de obtener al menos un 6 en 2 dados?",
-                        options: ["11/36", "1/36", "5/36"],
-                        correct: 0,
-                        topic: "Probabilidad",
-                        explanation: "1 - (5/6)² = 1 - 25/36 = 11/36"
-                    },
-                    {
-                        text: "Datos: 4,8,12,16,20. ¿Varianza?",
-                        options: ["32", "16", "8"],
-                        correct: 0,
-                        topic: "Estadística",
-                        explanation: "Media=12, diferencias²: 64+16+0+16+64=160, /5=32"
-                    },
-                    {
-                        text: "En un grupo de 10 personas, ¿comités de 3?",
-                        options: ["120", "720", "30"],
-                        correct: 0,
-                        topic: "Combinatoria",
-                        explanation: "C(10,3) = 120"
-                    },
-                    {
-                        text: "Si dos eventos son independientes con P(A)=0.3, P(B)=0.4, ¿P(A∪B)?",
-                        options: ["0.58", "0.7", "0.12"],
-                        correct: 0,
-                        topic: "Probabilidad",
-                        explanation: "P(A∪B)=0.3+0.4-(0.3×0.4)=0.7-0.12=0.58"
-                    },
-                    {
-                        text: "¿Cuál es el tercer cuartil de 1,2,3,4,5,6,7,8?",
-                        options: ["6.5", "6", "7"],
-                        correct: 0,
-                        topic: "Estadística",
-                        explanation: "Q3 = 6.5"
                     }
                 ]
             },
             
-            // ========== NIVEL ALTO ==========
+            // NIVEL ALTO (5 preguntas para prueba)
             {
                 name: "Nivel Alto - Pensamiento Matemático",
                 level: "Alto",
                 questions: [
-                    // Cálculo diferencial (6 preguntas)
                     {
                         text: "¿Cuál es la derivada de f(x) = 3x² + 2x - 5?",
                         options: ["6x + 2", "3x + 2", "6x - 2"],
@@ -943,79 +625,12 @@
                         explanation: "Factoriza: (x-2)(x+2)/(x-2) = x+2, límite = 4"
                     },
                     {
-                        text: "¿Cuál es la derivada de f(x) = sen(x)?",
-                        options: ["cos(x)", "-sen(x)", "-cos(x)"],
-                        correct: 0,
-                        topic: "Cálculo",
-                        explanation: "La derivada del seno es coseno"
-                    },
-                    {
-                        text: "¿Cuál es la derivada de f(x) = ln(x)?",
-                        options: ["1/x", "x", "e^x"],
-                        correct: 0,
-                        topic: "Cálculo",
-                        explanation: "d/dx ln(x) = 1/x"
-                    },
-                    {
-                        text: "¿Cuál es la integral de 2x dx?",
-                        options: ["x² + C", "x²", "2x² + C"],
-                        correct: 0,
-                        topic: "Cálculo",
-                        explanation: "∫2x dx = x² + C"
-                    },
-                    {
-                        text: "¿Cuál es la pendiente de la tangente a f(x)=x² en x=3?",
-                        options: ["6", "9", "3"],
-                        correct: 0,
-                        topic: "Cálculo",
-                        explanation: "f'(x)=2x, f'(3)=6"
-                    },
-                    
-                    // Álgebra lineal (6 preguntas)
-                    {
                         text: "¿Cuál es el determinante de [[2,3],[1,4]]?",
                         options: ["5", "11", "8"],
                         correct: 0,
                         topic: "Álgebra Lineal",
                         explanation: "2×4 - 3×1 = 8 - 3 = 5"
                     },
-                    {
-                        text: "Resuelve: 2x + 3y - z = 7, x - 2y + z = 4, 3x + y - 2z = 5",
-                        options: ["x=2,y=1,z=1", "x=1,y=2,z=3", "x=3,y=2,z=4"],
-                        correct: 0,
-                        topic: "Álgebra Lineal",
-                        explanation: "La solución es x=2, y=1, z=1"
-                    },
-                    {
-                        text: "¿Cuál es la inversa de [[2,0],[0,3]]?",
-                        options: ["[[1/2,0],[0,1/3]]", "[[2,0],[0,3]]", "[[-2,0],[0,-3]]"],
-                        correct: 0,
-                        topic: "Álgebra Lineal",
-                        explanation: "La inversa de una diagonal es el recíproco"
-                    },
-                    {
-                        text: "¿Cuál es el producto de [[1,2]] × [[3],[4]]?",
-                        options: ["11", "[3,8]", "10"],
-                        correct: 0,
-                        topic: "Álgebra Lineal",
-                        explanation: "1×3 + 2×4 = 3 + 8 = 11"
-                    },
-                    {
-                        text: "¿Cuál es el rango de [[1,2,3],[4,5,6],[7,8,9]]?",
-                        options: ["2", "3", "1"],
-                        correct: 0,
-                        topic: "Álgebra Lineal",
-                        explanation: "El rango es 2, filas dependientes"
-                    },
-                    {
-                        text: "¿Cuál es la traza de [[1,2],[3,4]]?",
-                        options: ["5", "4", "3"],
-                        correct: 0,
-                        topic: "Álgebra Lineal",
-                        explanation: "Suma diagonal: 1+4=5"
-                    },
-                    
-                    // Probabilidad avanzada (6 preguntas)
                     {
                         text: "En una distribución normal, ¿qué porcentaje está a 2σ?",
                         options: ["95%", "68%", "99%"],
@@ -1024,127 +639,11 @@
                         explanation: "Aproximadamente 95% está a 2 desviaciones"
                     },
                     {
-                        text: "Si la media es 50 y σ=5, ¿puntuación z para 60?",
-                        options: ["2", "1", "0.5"],
-                        correct: 0,
-                        topic: "Estadística",
-                        explanation: "z = (60-50)/5 = 2"
-                    },
-                    {
-                        text: "¿Probabilidad de obtener 3 águilas en 5 monedas?",
-                        options: ["10/32", "5/32", "1/32"],
-                        correct: 0,
-                        topic: "Probabilidad",
-                        explanation: "C(5,3)/2⁵ = 10/32"
-                    },
-                    {
-                        text: "¿Cuántas permutaciones circulares de 5 personas?",
-                        options: ["24", "120", "60"],
-                        correct: 0,
-                        topic: "Combinatoria",
-                        explanation: "(5-1)! = 4! = 24"
-                    },
-                    {
-                        text: "En una distribución binomial n=10, p=0.5, ¿P(X=5)?",
-                        options: ["252/1024", "120/1024", "512/1024"],
-                        correct: 0,
-                        topic: "Probabilidad",
-                        explanation: "C(10,5)/2¹⁰ = 252/1024"
-                    },
-                    {
-                        text: "¿Cuál es la mediana de una distribución normal N(μ,σ)?",
-                        options: ["μ", "0", "σ"],
-                        correct: 0,
-                        topic: "Estadística",
-                        explanation: "En normal, media=mediana=μ"
-                    },
-                    
-                    // Funciones avanzadas (6 preguntas)
-                    {
                         text: "¿Cuál es el dominio de f(x)=√(x-2)?",
                         options: ["x≥2", "x>2", "x≤2"],
                         correct: 0,
                         topic: "Funciones",
                         explanation: "El radicando debe ser ≥0"
-                    },
-                    {
-                        text: "¿Cuál es el rango de f(x)=x²+1?",
-                        options: "[1,∞)", "(0,∞)", "(-∞,∞)"],
-                        correct: 0,
-                        topic: "Funciones",
-                        explanation: "El mínimo es 1"
-                    },
-                    {
-                        text: "¿f(x)=x³ es par, impar o ninguna?",
-                        options: ["Impar", "Par", "Ninguna"],
-                        correct: 0,
-                        topic: "Funciones",
-                        explanation: "f(-x) = -f(x)"
-                    },
-                    {
-                        text: "¿Cuál es la inversa de f(x)=2x+3?",
-                        options: ["(x-3)/2", "2x-3", "(x+3)/2"],
-                        correct: 0,
-                        topic: "Funciones",
-                        explanation: "y=2x+3 → x=(y-3)/2"
-                    },
-                    {
-                        text: "¿Cuál es la composición f(g(x)) si f(x)=x², g(x)=x+1?",
-                        options: ["(x+1)²", "x²+1", "x²+x+1"],
-                        correct: 0,
-                        topic: "Funciones",
-                        explanation: "f(g(x)) = (x+1)²"
-                    },
-                    {
-                        text: "¿Cuál es el período de f(x)=sen(2x)?",
-                        options: ["π", "2π", "π/2"],
-                        correct: 0,
-                        topic: "Funciones",
-                        explanation: "Período = 2π/2 = π"
-                    },
-                    
-                    // Optimización (6 preguntas)
-                    {
-                        text: "¿Cuál es el máximo de f(x)=-x²+4x?",
-                        options: ["4", "2", "0"],
-                        correct: 0,
-                        topic: "Optimización",
-                        explanation: "Vértice en x=2, f(2)=4"
-                    },
-                    {
-                        text: "¿Cuál es el mínimo de f(x)=x²-6x+10?",
-                        options: ["1", "3", "0"],
-                        correct: 0,
-                        topic: "Optimización",
-                        explanation: "Vértice en x=3, f(3)=9-18+10=1"
-                    },
-                    {
-                        text: "¿Qué valor maximiza el producto de dos números que suman 10?",
-                        options: ["5 y 5", "4 y 6", "3 y 7"],
-                        correct: 0,
-                        topic: "Optimización",
-                        explanation: "El producto máximo es cuando son iguales"
-                    },
-                    {
-                        text: "¿Cuál es el área máxima de un rectángulo con perímetro 20?",
-                        options: ["25", "24", "20"],
-                        correct: 0,
-                        topic: "Optimización",
-                        explanation: "Cuadrado de lado 5, área=25"
-                    },
-                    {
-                        text: "¿Cuál es la derivada de f(x)=e^(2x)?",
-                        options: ["2e^(2x)", "e^(2x)", "2e^x"],
-                        correct: 0,
-                        topic: "Cálculo",
-                        explanation: "d/dx e^(2x) = 2e^(2x)"
-                    },
-                    {
-                        text: "¿∫ e^(3x) dx?",
-                        options: ["(1/3)e^(3x) + C", "3e^(3x) + C", "e^(3x) + C"],
-                        correct: 0,
-                        topic: "Cálculo",
-                        explanation: "∫ e^(kx) dx = (1/k)e^(kx)"
                     }
                 ]
             }
@@ -1160,33 +659,43 @@
         let timeLeft = 7200; // 2 horas
         let examFinished = false;
 
-        function selectExam(examIndex) {
+        // Función para seleccionar examen
+        window.selectExam = function(examIndex) {
             currentExam = examIndex;
             document.getElementById('exam0').classList.remove('active');
             document.getElementById('exam1').classList.remove('active');
             document.getElementById('exam2').classList.remove('active');
             document.getElementById(`exam${examIndex}`).classList.add('active');
             document.getElementById('examTitle').textContent = exams[examIndex].name;
-        }
+        };
 
-        function registerStudent() {
+        // Función para registrar estudiante
+        window.registerStudent = function() {
+            console.log('Registrando estudiante...');
+            
             const name = document.getElementById('studentName').value.trim();
             const id = document.getElementById('studentId').value.trim();
 
             if (!name || !id) {
-                alert('Completa todos los campos');
+                alert('Por favor, completa todos los campos');
                 return;
             }
 
             currentStudent = { name, id };
 
+            // Ocultar formulario de registro
             document.getElementById('registrationForm').style.display = 'none';
+            
+            // Mostrar contenido del examen
             document.getElementById('examContent').style.display = 'block';
             
+            // Inicializar el examen
             resetExam();
             startTimer();
             renderQuestions();
-        }
+            
+            console.log('Examen iniciado para:', currentStudent);
+        };
 
         function resetExam() {
             const exam = exams[currentExam];
@@ -1260,7 +769,7 @@
                 
                 questionDiv.innerHTML = `
                     <div class="question-header">
-                        <div class="question-number">Pregunta ${index+1}/30</div>
+                        <div class="question-number">Pregunta ${index+1}/${exam.questions.length}</div>
                         <div class="question-topic">${q.topic}</div>
                         ${isAnswered ? 
                             `<div class="answered-badge">${questionStatus[index]==='correct'?'✓ Correcta':'✗ Incorrecta'}</div>` : ''}
@@ -1279,7 +788,7 @@
             });
         }
 
-        function handleAnswer(questionIndex, optionIndex) {
+        window.handleAnswer = function(questionIndex, optionIndex) {
             if (questionStatus[questionIndex] !== 'pending' || examFinished) return;
 
             const exam = exams[currentExam];
@@ -1290,7 +799,7 @@
             
             updateQuestionDisplay(questionIndex);
             updateProgress();
-        }
+        };
 
         function updateQuestionDisplay(questionIndex) {
             const questionDiv = document.getElementById(`q${questionIndex}`);
@@ -1301,7 +810,7 @@
             
             const header = questionDiv.querySelector('.question-header');
             header.innerHTML = `
-                <div class="question-number">Pregunta ${questionIndex+1}/30</div>
+                <div class="question-number">Pregunta ${questionIndex+1}/${exam.questions.length}</div>
                 <div class="question-topic">${q.topic}</div>
                 <div class="answered-badge">${questionStatus[questionIndex]==='correct'?'✓ Correcta':'✗ Incorrecta'}</div>
             `;
@@ -1326,7 +835,7 @@
             }
         }
 
-        function nextQuestion() {
+        window.nextQuestion = function() {
             const exam = exams[currentExam];
             if (currentQuestion < exam.questions.length - 1) {
                 document.getElementById(`q${currentQuestion}`).style.display = 'none';
@@ -1334,16 +843,16 @@
                 document.getElementById(`q${currentQuestion}`).style.display = 'block';
                 updateNavigationButtons();
             }
-        }
+        };
 
-        function prevQuestion() {
+        window.prevQuestion = function() {
             if (currentQuestion > 0) {
                 document.getElementById(`q${currentQuestion}`).style.display = 'none';
                 currentQuestion--;
                 document.getElementById(`q${currentQuestion}`).style.display = 'block';
                 updateNavigationButtons();
             }
-        }
+        };
 
         function updateNavigationButtons() {
             const exam = exams[currentExam];
@@ -1379,7 +888,7 @@
             return { correct, incorrect, unanswered, topicResults };
         }
 
-        function finishExam() {
+        window.finishExam = function() {
             examFinished = true;
             clearInterval(timer);
             
@@ -1388,7 +897,7 @@
             const totalScore = (results.correct / exam.questions.length * 100).toFixed(1);
             
             showResults(results, totalScore);
-        }
+        };
 
         function showResults(results, totalScore) {
             const exam = exams[currentExam];
@@ -1421,11 +930,11 @@
             document.getElementById('resultsModal').style.display = 'flex';
         }
 
-        function closeModal() {
+        window.closeModal = function() {
             document.getElementById('resultsModal').style.display = 'none';
-        }
+        };
 
-        function downloadResults() {
+        window.downloadResults = function() {
             const exam = exams[currentExam];
             const results = calculateResults();
             const totalScore = (results.correct / exam.questions.length * 100).toFixed(1);
@@ -1456,7 +965,7 @@
             a.href = url;
             a.download = `resultados_${currentStudent.name}_${exam.level}.txt`;
             a.click();
-        }
+        };
 
         function formatTime(seconds) {
             const h = Math.floor(seconds/3600);
